@@ -1,6 +1,4 @@
 function Header({ image: { logo, cart } }) {
-  //    return console.log(image)
-
   return (
     <header className="header">
       <nav className="flex flex-jc-sb flex-ai-c mobile-padding">
@@ -20,8 +18,8 @@ function Header({ image: { logo, cart } }) {
           <a href="#">Blog</a>
         </div>
         <div className="flex flex-jc-c flex-ai-c header__right">
-          <a href="">Account</a>
-          <a href="">
+          <a href="#">Account</a>
+          <a href="#">
             <img src={cart} alt="" />
             <span>0</span>
           </a>

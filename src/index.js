@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'assests/scss/styles.scss';
-import Prodcut from 'components/Products';
+import Home from 'components/Home';
 
-ReactDOM.render(<Prodcut />, document.getElementById("root"));
+ReactDOM.render(<Home />, document.getElementById("root"));
 
