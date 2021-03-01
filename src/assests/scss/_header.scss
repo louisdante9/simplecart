@@ -1,0 +1,111 @@
+.header {
+  top: 0rem;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  background-color: #f5f5f4;
+  box-shadow: 0 2px 3px -3px grey; 
+
+  nav {
+    height: 64px;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 0.5rem;
+  }
+
+  &__logo {
+    display: inline-block;
+    width: 163px;
+    height: 44px;
+    margin-right: 4rem;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  &__menu {
+    //mobile menu
+    cursor: pointer;
+    > span {
+      display: block;
+      width: 16px;
+      height: 2px;
+      background-color: $black;
+
+      &:not(:last-child) {
+        margin-bottom: 3px;
+      }
+    }
+  }
+
+  a {
+    font-size: $font-sm;
+    line-height: 17px;
+    color: $black;
+    padding: 0.25rem 1rem;
+    transition: color 300ms ease-in-out;
+    margin-right: 1.25rem;
+
+    &:hover {
+      color: $darkGreen;
+
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__right {
+    a {
+      margin-right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+
+      &:last-of-type {
+        padding: 0;
+      }
+
+      img {
+        position: relative;
+        top: 4px;
+        height: 21px;
+        margin-right: 3px;
+        align-self: center;
+        transform: rotate(10deg);
+      }
+    }
+    .lang {
+      padding: 0rem;
+      margin-left: 1.5rem;
+      select {
+        height: 29px;
+        width: 84px;
+        padding-top: 2px;
+        padding-bottom: 1px;
+        padding-left: 0.5rem;
+        padding-right: 2rem;
+        line-height: 1;
+        background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+          no-repeat right;
+        -webkit-appearance: none;
+        background-size: 10px 10px;
+        background-position-x: 60px;
+        cursor: pointer;
+        outline: none;
+        border: 1px solid #cdd1ce;
+        border-radius: 0;
+      }
+    }
+  }
+  .mobile-padding {
+    //hide for desktop
+    @include breakpoints-down(medium) {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+}

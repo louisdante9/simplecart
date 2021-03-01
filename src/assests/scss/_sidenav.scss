@@ -1,0 +1,185 @@
+.body-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  .blur {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: 0.8;
+    background: $white;
+    backdrop-filter: blur(3px);
+  }
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #f2f2ef;
+    overflow-x: hidden;
+    transition: 0.5s ease;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+      &:hover {
+        color: black;
+      }
+    }
+    .closebtn {
+      font-size: 20px;
+      div {
+        width: 30px;
+        height: 30px;
+        border: 1px solid $lightGray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+				font-size: 13px;
+      }
+    }
+    .currency-select {
+      margin: 10px 20px 0;
+
+      select {
+        max-width: 80px;
+        background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+          no-repeat right #fff;
+        -webkit-appearance: none;
+        background-size: 10px 10px;
+        padding: 8px 35px 5px 10px;
+        background-position: 88% 60%;
+        cursor: pointer;
+        border-radius: 0;
+        border: 0.5px solid #cdd1ce;
+        outline: none;
+      }
+    }
+    .cart-top {
+      margin: 20px 0;
+      font-size: 10px;
+    }
+
+    .cart-title {
+      width: 60%;
+    }
+    .cart-body {
+      flex: 1;
+      padding: 0 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .cart-item {
+      display: flex;
+      margin: 20px 0;
+      background: $white;
+      .remove-item {
+        cursor: pointer;
+        float: right;
+        padding-right: 5px;
+        position: relative;
+        right: -96%;
+        top: 7px;
+        margin-right: 3px;
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0.7;
+      }
+      .item-description {
+        width: 65%;
+        font-size: 10px;
+        line-height: 18px;
+        letter-spacing: 0.02px;
+        padding: 20px 13px 18px 21px;
+        min-height: 100px;
+        color: $darkGrayishGreen;
+
+        h6 {
+          color: inherit;
+          font-size: 13px;
+          letter-spacing: 0.03px;
+          line-height: 1.5;
+        }
+        .made-for {
+          span:first-child {
+            font-weight: 600;
+            display: inline-block;
+            margin-right: 2px;
+          }
+        }
+        .quantity {
+          margin-top: 10px;
+          .qty_selector {
+            border: 0.5px solid $lightBlack;
+            padding: 7px;
+            width: 76px;
+            .counter-btn {
+              cursor: pointer;
+              font-size: 17px;
+            }
+            .counter-number {
+              padding: 0 10px;
+              font-size: 13px;
+            }
+          }
+          .price {
+            font-size: 13px;
+            letter-spacing: 0.03px;
+            font-weight: 400;
+          }
+        }
+      }
+      .item-image {
+        background-color: #fdfdfd;
+        width: 33.3%;
+        padding-right: 10px;
+
+        img {
+          height: 80px;
+          overflow: hidden;
+          width: auto;
+          object-fit: contain;
+        }
+      }
+    }
+    .cart-footer {
+      border-top: 1px solid $lightGray;
+      box-shadow: 0 -4px 12px $lightGray;
+      z-index: 1;
+      padding: 0 30px 20px;
+      .cart-subtotal {
+        margin: 10px 0;
+        padding-top: 10px;
+        span:last-child {
+          font-weight: 600;
+        }
+      }
+      .sub-button {
+        color: #2b2e2b;
+        letter-spacing: 0.96px;
+        border: 1px solid #2b2e2b;
+        background-color: #fff;
+        // visibility: hidden;
+      }
+      button {
+        margin-top: 15px;
+        font-size: 12px;
+        font-weight: 200;
+        &:last-child {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
