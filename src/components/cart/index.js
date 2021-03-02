@@ -1,17 +1,14 @@
-export default function Cart({ productOne }) {
+export default function Cart({ productOne, cartState, closeCart }) {
   return (
     <span className="body-wrapper">
-      <div id="background" className=""></div>
-      <div id="mySidenav" className="sidenav">
+      <div id="background" className={`${cartState ? "blur" : ""}`}></div>
+      <div id="mySidenav" className={`sidenav ${cartState ? "slide" : ""}`}>
         <div className="flex flex-ai-c flex-jc-sb cart-top">
-          <a
-            href="javascript:void(0)"
-            className="closebtn"
-            onclick="closeNav()">
-            <div>
+          <div className="closebtn">
+            <div onClick={closeCart}>
               <i className="fa fa-chevron-right"></i>
             </div>
-          </a>
+          </div>
           <div className="cart-title">YOUR CART</div>
         </div>
         <div className="currency-select">
