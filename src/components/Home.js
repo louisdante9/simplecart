@@ -7,7 +7,8 @@ import productOne from "assests/images/product_1024x1024.png";
 import Header from "components/UI/Header";
 import PageHeader from "components/PageHeader";
 import Main from "components/UI/Main";
-import Products from "components/Products";
+import ProductList from 'components/Products/ProductList'
+import ProductItems from "components/Products/ProductItems";
 import Blog from "components/Blog";
 import Footer from "components/Footer";
 import Cart from "./cart";
@@ -23,32 +24,40 @@ useEffect(() => {
     : document.body.classList.remove("body-scroll");
   
 }, [cartState])
-  const toggleCart = () => {
+  const openCart = (product) => {
+    // e.preventDefault();
+    setCartState((x) => !x);
+    setCartItems([...cartItems, {...product, units: 1}, ])
+    console.log(product)
+  };
+
+  const closeCart = () => {
     setCartState((x) => !x);
   };
-  console.log(cartState, "overflow");
+
+  console.log(cartItems, "overflow");
 
   return (
     <>
       <Header image={{ logo, cart }} />
       <Main>
         <PageHeader />
-        {!data ? (
-          <>sorry no products yet</>
-        ) : (
-          <Products
-            products={data}
-            image={{ productOne }}
-            openCart={toggleCart}
-          />
-        )}
-
+        <ProductList>
+          {!data ? (
+            <>sorry no products yet</>
+          ) : (
+            data?.products.map((product) => (
+              <ProductItems key={product.id} openCart={openCart} {...product} />
+            ))
+          )}
+        </ProductList>
         <Blog image={arrowRight} />
         <Footer />
         <Cart
           image={productOne}
           cartState={cartState}
-          closeCart={toggleCart}
+          closeCart={closeCart}
+          cartItems={cartItems}
         />
       </Main>
     </>

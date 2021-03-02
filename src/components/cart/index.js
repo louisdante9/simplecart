@@ -1,4 +1,7 @@
-export default function Cart({ productOne, cartState, closeCart }) {
+import CartItems from "./CartItems";
+
+export default function Cart({ productOne, cartState, closeCart, cartItems }) {
+  console.log(cartItems, 'array')
   return (
     <span className="body-wrapper">
       <div id="background" className={`${cartState ? "blur" : ""}`}></div>
@@ -22,116 +25,15 @@ export default function Cart({ productOne, cartState, closeCart }) {
         </div>
         <div className="cart-body">
           <div className="cart-items-list">
-            <div className="cart-item">
-              <span className="remove-item">X</span>
-              <div className="item-description">
-                <h6>Clarifying Body Wash</h6>
-                <div className="made-for">
-                  <span>MADE FOR:</span>
-                  nwamadi chukwuebuka theodore louis
-                </div>
-                <div>One time purchase of Two Month supply.</div>
-                <div className="flex flex-ai-c flex-jc-sb quantity">
-                  <div className="flex flex-ai-c flex-jc-sb qty_selector">
-                    <span className="counter-btn">-</span>
-                    <span className="counter-number">1</span>
-                    <span className="counter-btn">+</span>
-                  </div>
-                  <div className="price">NGN 5,200.00</div>
-                </div>
-              </div>
-              <div className="item-image">
-                <img src={productOne} alt="" />
-              </div>
-            </div>
-            <div className="cart-item">
-              <span className="remove-item">X</span>
-              <div className="item-description">
-                <h6>Clarifying Body Wash</h6>
-                <div className="made-for">
-                  <span>MADE FOR:</span>
-                  nwamadi chukwuebuka theodore louis
-                </div>
-                <div>One time purchase of Two Month supply.</div>
-                <div className="flex flex-ai-c flex-jc-sb quantity">
-                  <div className="flex flex-ai-c flex-jc-sb qty_selector">
-                    <span className="counter-btn">-</span>
-                    <span className="counter-number">1</span>
-                    <span className="counter-btn">+</span>
-                  </div>
-                  <div className="price">NGN 5,200.00</div>
-                </div>
-              </div>
-              <div className="item-image">
-                <img src={productOne} alt="" />
-              </div>
-            </div>
-            <div className="cart-item">
-              <span className="remove-item">X</span>
-              <div className="item-description">
-                <h6>Clarifying Body Wash</h6>
-                <div className="made-for">
-                  <span>MADE FOR:</span>
-                  nwamadi chukwuebuka theodore louis
-                </div>
-                <div>One time purchase of Two Month supply.</div>
-                <div className="flex flex-ai-c flex-jc-sb quantity">
-                  <div className="flex flex-ai-c flex-jc-sb qty_selector">
-                    <span className="counter-btn">-</span>
-                    <span className="counter-number">1</span>
-                    <span className="counter-btn">+</span>
-                  </div>
-                  <div className="price">NGN 5,200.00</div>
-                </div>
-              </div>
-              <div className="item-image">
-                <img src={productOne} alt="" />
-              </div>
-            </div>
-            <div className="cart-item">
-              <span className="remove-item">X</span>
-              <div className="item-description">
-                <h6>Clarifying Body Wash</h6>
-                <div className="made-for">
-                  <span>MADE FOR:</span>
-                  nwamadi chukwuebuka theodore louis
-                </div>
-                <div>One time purchase of Two Month supply.</div>
-                <div className="flex flex-ai-c flex-jc-sb quantity">
-                  <div className="flex flex-ai-c flex-jc-sb qty_selector">
-                    <span className="counter-btn">-</span>
-                    <span className="counter-number">1</span>
-                    <span className="counter-btn">+</span>
-                  </div>
-                  <div className="price">NGN 5,200.00</div>
-                </div>
-              </div>
-              <div className="item-image">
-                <img src={productOne} alt="" />
-              </div>
-            </div>
-            <div className="cart-item">
-              <span className="remove-item">X</span>
-              <div className="item-description">
-                <h6>Clarifying Body Wash</h6>
-                <div className="made-for">
-                  <span>MADE FOR:</span>
-                  nwamadi chukwuebuka theodore louis
-                </div>
-                <div>One time purchase of Two Month supply.</div>
-                <div className="flex flex-ai-c flex-jc-sb quantity">
-                  <div className="flex flex-ai-c flex-jc-sb qty_selector">
-                    <span className="counter-btn">-</span>
-                    <span className="counter-number">1</span>
-                    <span className="counter-btn">+</span>
-                  </div>
-                  <div className="price">NGN 5,200.00</div>
-                </div>
-              </div>
-              <div className="flex flex-ai-c flex-jc-sb item-image">
-                <img src={productOne} alt="" />
-              </div>
-            </div>
+            {/* hello there */}
+            {cartItems && cartItems.map(item => {
+              return <CartItems key={item.id} {...item} />;
+            })}
+            {/* <CartItems productOne={productOne} />
+            <CartItems productOne={productOne} />
+            <CartItems productOne={productOne} />
+            <CartItems productOne={productOne} />
+            <CartItems productOne={productOne} /> */}
           </div>
         </div>
         <div className="cart-footer">

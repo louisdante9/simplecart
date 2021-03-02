@@ -5,6 +5,7 @@ export const LOAD_PRODUCTS = gql`
     products {
       id
       title
+      price(currency: NGN),
       image_url
     }
   }
