@@ -27,7 +27,14 @@ useEffect(() => {
   const openCart = (product) => {
     // e.preventDefault();
     setCartState((x) => !x);
-    setCartItems([...cartItems, {...product, units: 1}, ])
+    const existingProduct = cartItems.filter(p=> p.id === product.id)
+    const withoutExistingProducts = cartItems.filter(p=> p.id !== product.id)
+    existingProduct.length > 0
+      ? setCartItems([
+          ...withoutExistingProducts,
+          { ...existingProduct[0], units: existingProduct[0].units + 1 },
+        ])
+      : setCartItems([...cartItems, { ...product, units: 1 }]);
     console.log(product)
   };
 
