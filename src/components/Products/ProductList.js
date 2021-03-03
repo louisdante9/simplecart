@@ -5,7 +5,7 @@ import { addToCart, getItemPrice, toggleCart } from "reduxlib/actions";
 
 export default function ProductList({ data, toggle }) {
   const dispatch = useDispatch()
-    const openCart = (product) => {
+    const addItemToCart = (product) => {
       dispatch(toggleCart(!toggle.toggleState));
       dispatch(addToCart(product));
       dispatch(getItemPrice(product));
@@ -17,7 +17,11 @@ export default function ProductList({ data, toggle }) {
           <>sorry no products yet</>
         ) : (
           data?.products.map((product) => (
-            <ProductItems key={product.id} openCart={openCart} {...product} />
+            <ProductItems
+              key={product.id}
+              openCart={addItemToCart}
+              {...product}
+            />
           ))
         )}
       </div>

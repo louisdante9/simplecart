@@ -26,19 +26,16 @@ function Home() {
       : document.body.classList.remove("body-scroll");
   }, [toggle.toggleState]);
 
+  // const openCart = () => {
+  //   dispatch(toggleCart(!toggle.toggleState));
+  // };
   const closeCart = () => {
     dispatch(toggleCart(!toggle.toggleState));
   };
-  // const updateUnit = (product) => {
-  //   console.log(product)
-  //   if (product.unit < 1) {
-      
-  //   }
-  //   dispatch(updateCartUnits(product))
-  // }
+
   return (
     <>
-      <Header image={{ logo, cartImg }} />
+      <Header image={{ logo, cartImg }} itemCount={cart.length} viewCart={closeCart}/>
       <Main>
         <PageHeader />
         <ProductList data={data} toggle={toggle} />

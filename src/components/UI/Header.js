@@ -1,4 +1,4 @@
-function Header({ image: { logo, cartImg } }) {
+function Header({ image: { logo, cartImg }, itemCount, viewCart }) {
   return (
     <header className="header">
       <nav className="flex flex-jc-sb flex-ai-c mobile-padding">
@@ -19,9 +19,9 @@ function Header({ image: { logo, cartImg } }) {
         </div>
         <div className="flex flex-jc-c flex-ai-c header__right">
           <a href="#">Account</a>
-          <a href="#">
+          <a  onClick={viewCart}>
             <img src={cartImg} alt="" />
-            <span>0</span>
+            <span>{itemCount}</span>
           </a>
           <div className="lang">
             <select className="">
