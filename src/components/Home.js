@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useDispatch, useSelector } from "react-redux";
+import { useQuery, gql, fromError } from "@apollo/client";
 import logo from "assests/images/logo.png";
 import cart from "assests/images/carts.png";
 import arrowRight from "assests/images/arrow-right.png";
@@ -12,9 +13,10 @@ import ProductItems from "components/Products/ProductItems";
 import Blog from "components/Blog";
 import Footer from "components/Footer";
 import Cart from "./cart";
-import { LOAD_PRODUCTS } from "graphql/queries";
+import { LOAD_PRODUCTS } from "graphlib/queries";
 
 function Home() {
+   const {cart} = useSelector((state) => state)
   const [cartState, setCartState] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
@@ -52,7 +54,7 @@ function Home() {
   const closeCart = () => {
     setCartState((x) => !x);
   };
-
+console.log(cart, 'helo reducer');
   return (
     <>
       <Header image={{ logo, cart }} />

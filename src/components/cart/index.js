@@ -27,13 +27,8 @@ export default function Cart({ productOne, cartState, closeCart, cartItems }) {
           <div className="cart-items-list">
             {/* hello there */}
             {cartItems && cartItems.map(item => {
-              return <CartItems key={item.id} {...item} />;
+              return <CartItems {...item} key={item.id} />;
             })}
-            {/* <CartItems productOne={productOne} />
-            <CartItems productOne={productOne} />
-            <CartItems productOne={productOne} />
-            <CartItems productOne={productOne} />
-            <CartItems productOne={productOne} /> */}
           </div>
         </div>
         <div className="cart-footer">
