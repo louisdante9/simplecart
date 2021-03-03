@@ -2,6 +2,7 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 export const UPDATE_CART_UNITS = "UPDATE_CART_UNITS";
 export const REMOVE_CART_UNIT = "REMOVE_CART_UNIT";
 export const TOGGLE = 'TOGGLE'
+export const ITEM_PRICE = 'ITEM_PRICE'
 
 export function addToCart (product) {
     return {
@@ -9,10 +10,10 @@ export function addToCart (product) {
         payload: product
     }
 }
-export function updateCartUnits ({id, units}) {
+export function updateCartUnits ({id, units, price}) {
     return {
       type: UPDATE_CART_UNITS,
-      payload: {id, units},
+      payload: {id, units, price},
     };
 }
 export function removeFromCart (id) {
@@ -27,4 +28,11 @@ export function toggleCart (status) {
         type: TOGGLE,
         payload: status
     }
+}
+
+export function getItemPrice(product) {
+    return {
+        type: 'ITEM_PRICE',
+        payload: product.price
+      }
 }

@@ -1,6 +1,6 @@
 import {useDispatch} from 'react-redux';
 import ProductItems from "components/Products/ProductItems";
-import {addToCart, toggleCart} from 'reduxlib/actions'
+import { addToCart, getItemPrice, toggleCart } from "reduxlib/actions";
 
 
 export default function ProductList({ data, toggle }) {
@@ -8,6 +8,7 @@ export default function ProductList({ data, toggle }) {
     const openCart = (product) => {
       dispatch(toggleCart(!toggle.toggleState));
       dispatch(addToCart(product));
+      dispatch(getItemPrice(product));
     };
   return (
     <section className="products">

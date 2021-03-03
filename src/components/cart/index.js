@@ -1,13 +1,33 @@
-import CartItems from "./CartItems";
-import {useDispatch} from 'react-redux';
-import {removeFromCart} from 'reduxlib/actions'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Items from "./CartItems";
+import { removeFromCart, updateCartUnits } from "reduxlib/actions";
 
-export default function Cart({ cartState, closeCart, cartItems, updateUnit }) {
-  const dispatch = useDispatch()
+export default function Cart({ cartState, closeCart, cartItems }) {
+  const dispatch = useDispatch();
+  const { itemPrice } = useSelector((state) => state);
+  const [cartTotal, setCartTotal] = useState(0);
+  useEffect(() => {
+    if (cartItems.length) {
+      subTotal(cartItems);
+    }
+  }, [cartItems]);
+
+  const subTotal = (items) => {
+    const result = items.map((item) => item.price).reduce((a, b) => a + b);
+    return setCartTotal(result);
+  };
+
+  const updateUnit = (product) => {
+    if (product.units < 1) {
+      return dispatch(removeFromCart(product.id));
+    }
+    dispatch(updateCartUnits(product));
+  };
+
   const removeItem = (id) => {
-    console.log(id, 'item id')
     dispatch(removeFromCart(id));
-  }
+  };
   return (
     <span className="body-wrapper">
       <div id="background" className={`${cartState ? "blur" : ""}`}></div>
@@ -31,27 +51,27 @@ export default function Cart({ cartState, closeCart, cartItems, updateUnit }) {
         </div>
         <div className="cart-body">
           <div className="cart-items-list">
-            {cartItems.length ?
+            {cartItems.length ? (
               cartItems.map((item) => {
                 return (
-                  <CartItems
+                  <Items
                     {...item}
+                    itemPrice={itemPrice.price}
                     updateUnit={updateUnit}
                     key={item.id}
                     removeItem={removeItem}
                   />
                 );
               })
-              : <p className="cart-empty">
-                There are no items in your cart.
-              </p>
-              }
+            ) : (
+              <p className="cart-empty">There are no items in your cart.</p>
+            )}
           </div>
         </div>
         <div className="cart-footer">
           <div className="flex flex-ai-c flex-jc-sb cart-subtotal">
             <span>Subtotal</span>
-            <span>NGN 55,200.00</span>
+            <span>NGN {cartTotal}</span>
           </div>
           <button className="sub-button">
             MAKE THIS A SUBSCRIPTION (SAVE 20%)

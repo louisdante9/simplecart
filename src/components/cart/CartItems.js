@@ -6,6 +6,7 @@ export default function CartItems({
   units,
   updateUnit,
   removeItem,
+  itemPrice
 }) {
   return (
     <div className="cart-item">
@@ -20,13 +21,17 @@ export default function CartItems({
           <div className="flex flex-ai-c flex-jc-sb qty_selector">
             <span
               className="counter-btn"
-              onClick={() => updateUnit({ id, units: units - 1 })}>
+              onClick={() =>
+                updateUnit({ id, units: units - 1, price: price - itemPrice })
+              }>
               -
             </span>
             <span className="counter-number">{units}</span>
             <span
               className="counter-btn"
-              onClick={() => updateUnit({ id, units: units + 1 })}>
+              onClick={() =>
+                updateUnit({ id, units: units + 1, price: price + itemPrice })
+              }>
               +
             </span>
           </div>

@@ -16,27 +16,27 @@ const cartReducer = (state = [], action) => {
           : [...cart, product];
       return updatedCart;
     }
+
     case UPDATE_CART_UNITS: {
       const { payload } = action;
       const cart = state;
       const existingProductIndex = findProductIndex(cart, payload.id);
       if (existingProductIndex >= 0) {
-        let product = cart[existingProductIndex];
-        product.units = payload.units;
-        cart[existingProductIndex] = product;
+        cart[existingProductIndex] = {
+          ...cart[existingProductIndex],
+          ...payload,
+        };
       }
       return [...cart];
     }
-    case REMOVE_CART_UNIT: {
+    
+    case REMOVE_CART_UNIT:
       const productId = action.payload;
-      const cart = [...state];
-      const productIndex = findProductIndex(cart, productId);
-      console.log(productIndex, "productIndex");
-      if (productIndex >= 0) {
-        cart.splice(productIndex, 1);
-      }
-      return cart;
-    }
+      const productIndex = findProductIndex(state, productId);
+      return [
+        ...state.slice(0, productIndex),
+        ...state.slice(productIndex + 1),
+      ];
 
     default:
       return state;
@@ -46,6 +46,8 @@ const cartReducer = (state = [], action) => {
 const findProductIndex = (items, productId) => {
   return items.findIndex((p) => p.id === productId);
 };
+
+
 const updateProductUnit = (items, product, productIndex) => {
   const cartProducts = [...items];
   const existingProduct = cartProducts[productIndex];

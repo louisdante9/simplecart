@@ -13,7 +13,7 @@ import Blog from "components/Blog";
 import Footer from "components/Footer";
 import Cart from "./cart";
 import { LOAD_PRODUCTS } from "graphlib/queries";
-import { toggleCart, updateCartUnits } from "reduxlib/actions";
+import { toggleCart } from "reduxlib/actions";
 
 function Home() {
   const dispatch = useDispatch();
@@ -29,9 +29,13 @@ function Home() {
   const closeCart = () => {
     dispatch(toggleCart(!toggle.toggleState));
   };
-  const updateUnit = (product) => {
-    dispatch(updateCartUnits(product))
-  }
+  // const updateUnit = (product) => {
+  //   console.log(product)
+  //   if (product.unit < 1) {
+      
+  //   }
+  //   dispatch(updateCartUnits(product))
+  // }
   return (
     <>
       <Header image={{ logo, cartImg }} />
@@ -43,7 +47,7 @@ function Home() {
         <Cart
           image={productOne}
           cartState={toggle.toggleState}
-          updateUnit={updateUnit}
+          // updateUnit={updateUnit}
           closeCart={closeCart}
           cartItems={cart}
         />

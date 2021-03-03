@@ -1,6 +1,8 @@
+import { TOGGLE } from "reduxlib/actions";
+
 const toggleReducer = (state = {toggleState: false}, action) => {
   switch (action.type) {
-    case "TOGGLE":
+    case TOGGLE:
       return {
         ...state,
         toggleState: action.payload,
