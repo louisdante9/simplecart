@@ -1,7 +1,13 @@
 import CartItems from "./CartItems";
+import {useDispatch} from 'react-redux';
+import {removeFromCart} from 'reduxlib/actions'
 
-export default function Cart({ productOne, cartState, closeCart, cartItems }) {
-  console.log(cartItems, 'array')
+export default function Cart({ cartState, closeCart, cartItems, updateUnit }) {
+  const dispatch = useDispatch()
+  const removeItem = (id) => {
+    console.log(id, 'item id')
+    dispatch(removeFromCart(id));
+  }
   return (
     <span className="body-wrapper">
       <div id="background" className={`${cartState ? "blur" : ""}`}></div>
@@ -25,10 +31,21 @@ export default function Cart({ productOne, cartState, closeCart, cartItems }) {
         </div>
         <div className="cart-body">
           <div className="cart-items-list">
-            {/* hello there */}
-            {cartItems && cartItems.map(item => {
-              return <CartItems {...item} key={item.id} />;
-            })}
+            {cartItems.length ?
+              cartItems.map((item) => {
+                return (
+                  <CartItems
+                    {...item}
+                    updateUnit={updateUnit}
+                    key={item.id}
+                    removeItem={removeItem}
+                  />
+                );
+              })
+              : <p className="cart-empty">
+                There are no items in your cart.
+              </p>
+              }
           </div>
         </div>
         <div className="cart-footer">

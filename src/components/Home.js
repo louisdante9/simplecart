@@ -2,80 +2,50 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery, gql, fromError } from "@apollo/client";
 import logo from "assests/images/logo.png";
-import cart from "assests/images/carts.png";
+import cartImg from "assests/images/carts.png";
 import arrowRight from "assests/images/arrow-right.png";
 import productOne from "assests/images/product_1024x1024.png";
 import Header from "components/UI/Header";
 import PageHeader from "components/PageHeader";
 import Main from "components/UI/Main";
 import ProductList from "components/Products/ProductList";
-import ProductItems from "components/Products/ProductItems";
 import Blog from "components/Blog";
 import Footer from "components/Footer";
 import Cart from "./cart";
 import { LOAD_PRODUCTS } from "graphlib/queries";
+import { toggleCart, updateCartUnits } from "reduxlib/actions";
 
 function Home() {
-   const {cart} = useSelector((state) => state)
-  const [cartState, setCartState] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
+  const dispatch = useDispatch();
+  const { cart, toggle } = useSelector((state) => state);
   const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+
   useEffect(() => {
-    cartState
+    toggle.toggleState
       ? document.body.classList.add("body-scroll")
       : document.body.classList.remove("body-scroll");
-  }, [cartState]);
-
-  const findProductIndex = (items, product) => {
-    return items.findIndex((p) => p.id === product.id);
-  };
-
-  const updateProductUnit = (items, product, productIndex) => {
-    const cartProducts = [...items];
-    const existingProduct = cartProducts[productIndex];
-    const updatedExistingProduct = {
-      ...existingProduct,
-      units: existingProduct.units + product.units,
-    };
-    cartProducts[productIndex] = updatedExistingProduct;
-    return cartProducts;
-  };
-
-  const openCart = (product) => {
-    setCartState((x) => !x);
-    const existingProductIndex = findProductIndex(cartItems, product);
-    existingProductIndex >= 0
-      ? setCartItems((c) =>
-          updateProductUnit(cartItems, product, existingProductIndex)
-        )
-      : setCartItems([...cartItems, product]);
-  };
+  }, [toggle.toggleState]);
 
   const closeCart = () => {
-    setCartState((x) => !x);
+    dispatch(toggleCart(!toggle.toggleState));
   };
-console.log(cart, 'helo reducer');
+  const updateUnit = (product) => {
+    dispatch(updateCartUnits(product))
+  }
   return (
     <>
-      <Header image={{ logo, cart }} />
+      <Header image={{ logo, cartImg }} />
       <Main>
         <PageHeader />
-        <ProductList>
-          {!data ? (
-            <>sorry no products yet</>
-          ) : (
-            data?.products.map((product) => (
-              <ProductItems key={product.id} openCart={openCart} {...product} />
-            ))
-          )}
-        </ProductList>
+        <ProductList data={data} toggle={toggle} />
         <Blog image={arrowRight} />
         <Footer />
         <Cart
           image={productOne}
-          cartState={cartState}
+          cartState={toggle.toggleState}
+          updateUnit={updateUnit}
           closeCart={closeCart}
-          cartItems={cartItems}
+          cartItems={cart}
         />
       </Main>
     </>
