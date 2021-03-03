@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@apollo/client";
 import Items from "./CartItems";
 import { removeFromCart, updateCartUnits } from "reduxlib/actions";
+import { LOAD_CURRENCY } from "graphlib/queries";
 
-export default function Cart({ cartState, closeCart, cartItems }) {
+export default function Cart({
+  cartState,
+  closeCart,
+  cartItems,
+  defaultCurrency,
+  setCurrency,
+}) {
   const dispatch = useDispatch();
   const { itemPrice } = useSelector((state) => state);
   const [cartTotal, setCartTotal] = useState(0);
+  const { data } = useQuery(LOAD_CURRENCY);
+
   useEffect(() => {
     if (cartItems.length) {
       subTotal(cartItems);
@@ -41,12 +51,19 @@ export default function Cart({ cartState, closeCart, cartItems }) {
           <div className="cart-title">YOUR CART</div>
         </div>
         <div className="currency-select">
-          <select name="" id="">
-            <option selected="" value="NGN">
+          <select name="" id="" value={defaultCurrency} onChange={(e)=> setCurrency(e.target.value)}>
+            {data?.currency.map((curr) => {
+              return (
+                <option value={curr} key={curr}>
+                  {curr}
+                </option>
+              );
+            })}
+            {/* <option selected="" value="NGN">
               NGN
             </option>
             <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
+            <option value="EUR">EUR</option> */}
           </select>
         </div>
         <div className="cart-body">

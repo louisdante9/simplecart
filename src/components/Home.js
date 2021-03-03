@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useQuery, gql, fromError } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import logo from "assests/images/logo.png";
 import cartImg from "assests/images/carts.png";
 import arrowRight from "assests/images/arrow-right.png";
@@ -18,35 +18,42 @@ import { toggleCart } from "reduxlib/actions";
 function Home() {
   const dispatch = useDispatch();
   const { cart, toggle } = useSelector((state) => state);
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS);
+  const [defaultCurrency, setDefaultCurrency] = useState("NGN");
 
+  const { error, loading, data } = useQuery(LOAD_PRODUCTS, {
+    variables: { currency: defaultCurrency },
+  });
+console.log(defaultCurrency, "data");
   useEffect(() => {
     toggle.toggleState
       ? document.body.classList.add("body-scroll")
       : document.body.classList.remove("body-scroll");
   }, [toggle.toggleState]);
 
-  // const openCart = () => {
-  //   dispatch(toggleCart(!toggle.toggleState));
-  // };
-  const closeCart = () => {
+
+  const viewCart = () => {
     dispatch(toggleCart(!toggle.toggleState));
   };
 
   return (
     <>
-      <Header image={{ logo, cartImg }} itemCount={cart.length} viewCart={closeCart}/>
+      <Header
+        image={{ logo, cartImg }}
+        itemCount={cart.length}
+        viewCart={viewCart}
+      />
       <Main>
         <PageHeader />
-        <ProductList data={data} toggle={toggle} />
+        <ProductList data={data} toggle={toggle} loading={loading} />
         <Blog image={arrowRight} />
         <Footer />
         <Cart
           image={productOne}
           cartState={toggle.toggleState}
-          // updateUnit={updateUnit}
-          closeCart={closeCart}
+          closeCart={viewCart}
           cartItems={cart}
+          defaultCurrency={defaultCurrency}
+          setCurrency={setDefaultCurrency}
         />
       </Main>
     </>

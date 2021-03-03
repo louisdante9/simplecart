@@ -6,7 +6,8 @@ export default function CartItems({
   units,
   updateUnit,
   removeItem,
-  itemPrice
+  itemPrice,
+  curr,
 }) {
   return (
     <div className="cart-item">

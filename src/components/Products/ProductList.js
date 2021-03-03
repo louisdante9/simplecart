@@ -3,7 +3,7 @@ import ProductItems from "components/Products/ProductItems";
 import { addToCart, getItemPrice, toggleCart } from "reduxlib/actions";
 
 
-export default function ProductList({ data, toggle }) {
+export default function ProductList({ data, toggle, loading }) {
   const dispatch = useDispatch()
     const addItemToCart = (product) => {
       dispatch(toggleCart(!toggle.toggleState));
@@ -13,7 +13,7 @@ export default function ProductList({ data, toggle }) {
   return (
     <section className="products">
       <div className="flex flex-fw-w products__wrapper mobile-items">
-        {!data ? (
+        {loading ? (
           <>sorry no products yet</>
         ) : (
           data?.products.map((product) => (
