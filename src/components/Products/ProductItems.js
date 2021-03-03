@@ -9,7 +9,7 @@ export default function ProductItems({ id, image_url, price, title, openCart }) 
         <span>From:</span>
         <span>NGN {price}</span>
       </div>
-      <button onClick={() => openCart({ id, image_url, price, title })}>
+      <button onClick={() => openCart({ id, image_url, price, title, units: 1 })}>
         Add to Cart
       </button>
     </div>
