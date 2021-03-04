@@ -17,6 +17,8 @@ export default function CartItems({
   removeItem: (id: number) => void;
   defaultCurrency: string;
 }) {
+  const reduceItem = { id, units: units - 1, price: price / units };
+  const increaseItem = { id, units: units + 1, price: price * units };
   return (
     <div className="cart-item">
       <span className="remove-item" onClick={() => removeItem(id)}>
@@ -31,7 +33,7 @@ export default function CartItems({
             <span
               className="counter-btn"
               onClick={() =>
-                updateUnit({ id, units: units - 1, price: price / units })
+                updateUnit(reduceItem)
               }>
               -
             </span>
@@ -39,7 +41,7 @@ export default function CartItems({
             <span
               className="counter-btn"
               onClick={() =>
-                updateUnit({ id, units: units + 1, price: price * units })
+                updateUnit(increaseItem)
               }>
               +
             </span>

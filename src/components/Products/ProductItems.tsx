@@ -14,7 +14,7 @@ export default function ProductItems({
   title: string
 }) {
   return (
-    <div className="flex flex-fd-c flex-ai-c item ">
+    <div className="flex flex-fd-c flex-ai-c item">
       <div className="image">
         <img src={image_url} alt="" />
         <h2>{title}</h2>
