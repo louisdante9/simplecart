@@ -58,6 +58,9 @@ Contributions are always welcome. If you are interested in enhancing the feature
 + If you find bugs in the application, create a `New Issue` and let me know about it.
 + If you need clarification on what is not clear, contact me via mail [louisdante9@gmail.com](mailto:h.louisdante9@gmail.com)
 
+## Notes
+    So much more can be done to improve this code base such as unit testing and removal of the redux state management tool then by allowing the full using of apollo client capabities but i decided to use both to showcase both skills and understanding on the different tools. 
+    
 ## Author
     Louis Nwamadi
 
