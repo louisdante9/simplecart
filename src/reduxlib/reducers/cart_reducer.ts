@@ -3,8 +3,7 @@ import {
   UPDATE_CART_UNITS,
   REMOVE_CART_UNIT,
 } from "reduxlib/actions";
-
-const cartReducer = (state = [], action) => {
+const cartReducer = (state: [] = [], action: {[key: string]: any}) => {
   switch (action.type) {
     case ADD_TO_CART: {
       const product = action.payload;
@@ -16,10 +15,10 @@ const cartReducer = (state = [], action) => {
           : [...cart, product];
       return updatedCart;
     }
-    
+
     case UPDATE_CART_UNITS: {
       const { payload } = action;
-      const cart = state;
+      const cart: any[] = state;
       const existingProductIndex = findProductIndex(cart, payload.id);
       if (existingProductIndex >= 0) {
         cart[existingProductIndex] = {
@@ -29,7 +28,7 @@ const cartReducer = (state = [], action) => {
       }
       return [...cart];
     }
-    
+
     case REMOVE_CART_UNIT:
       const productId = action.payload;
       const productIndex = findProductIndex(state, productId);
@@ -43,14 +42,18 @@ const cartReducer = (state = [], action) => {
   }
 };
 
-const findProductIndex = (items, productId) => {
-  return items.findIndex((p) => p.id === productId);
+const findProductIndex = (items: any[], productId: number) => {
+  return items.findIndex((p: {id: number}) => p.id === productId);
 };
 
 
-const updateProductUnit = (items, product, productIndex) => {
-  const cartProducts = [...items];
-  const existingProduct = cartProducts[productIndex];
+const updateProductUnit = (
+  items: any[],
+  product: { [key: string]: number },
+  productIndex: number
+) => {
+  const cartProducts:any[] = [...items];
+  const existingProduct: { [key: string]: number } = cartProducts[productIndex];
   const updatedExistingProduct = {
     ...existingProduct,
     units: existingProduct.units + product.units,

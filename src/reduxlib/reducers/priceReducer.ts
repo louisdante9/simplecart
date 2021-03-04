@@ -1,6 +1,6 @@
 import { ITEM_PRICE } from "reduxlib/actions";
 
-const priceReducer = (state = { price: 0 }, action) => {
+const priceReducer = (state = { price: 0 }, action: { [key: string]: any }) => {
   switch (action.type) {
     case ITEM_PRICE:
       return {
