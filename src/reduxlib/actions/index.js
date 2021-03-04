@@ -3,6 +3,7 @@ export const UPDATE_CART_UNITS = "UPDATE_CART_UNITS";
 export const REMOVE_CART_UNIT = "REMOVE_CART_UNIT";
 export const TOGGLE = 'TOGGLE'
 export const ITEM_PRICE = 'ITEM_PRICE'
+export const UPDATE_CART_ITEMS_PRICE = "UPDATE_CART_ITEMS_PRICE";
 
 export function addToCart (product) {
     return {
@@ -35,4 +36,11 @@ export function getItemPrice(product) {
         type: 'ITEM_PRICE',
         payload: product.price
       }
+}
+
+export function getAllProducts(data) {
+    return {
+      type: "PRODUCTS",
+      payload: data?.products,
+    }
 }

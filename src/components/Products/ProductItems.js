@@ -1,4 +1,11 @@
-export default function ProductItems({ id, image_url, price, title, openCart }) {
+export default function ProductItems({
+  id,
+  image_url,
+  price,
+  title,
+  openCart,
+  defaultCurrency,
+}) {
   return (
     <div className="flex flex-fd-c flex-ai-c item ">
       <div className="image">
@@ -6,10 +13,13 @@ export default function ProductItems({ id, image_url, price, title, openCart }) 
         <h2>{title}</h2>
       </div>
       <div className="price">
-        <span>From:</span>
-        <span>NGN {price}</span>
+        <span>From: </span>
+        <span>
+          {defaultCurrency} {price}
+        </span>
       </div>
-      <button onClick={() => openCart({ id, image_url, price, title, units: 1 })}>
+      <button
+        onClick={() => openCart({ id, units: 1 })}>
         Add to Cart
       </button>
     </div>

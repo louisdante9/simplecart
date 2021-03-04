@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   UPDATE_CART_UNITS,
   REMOVE_CART_UNIT,
+  UPDATE_CART_ITEMS_PRICE,
 } from "reduxlib/actions";
 
 const cartReducer = (state = [], action) => {
@@ -16,7 +17,7 @@ const cartReducer = (state = [], action) => {
           : [...cart, product];
       return updatedCart;
     }
-
+    
     case UPDATE_CART_UNITS: {
       const { payload } = action;
       const cart = state;

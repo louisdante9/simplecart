@@ -1,13 +1,13 @@
 export default function CartItems({
   id,
-  image_url,
+  image,
   price,
   title,
   units,
   updateUnit,
   removeItem,
   itemPrice,
-  curr,
+  defaultCurrency,
 }) {
   return (
     <div className="cart-item">
@@ -23,7 +23,7 @@ export default function CartItems({
             <span
               className="counter-btn"
               onClick={() =>
-                updateUnit({ id, units: units - 1, price: price - itemPrice })
+                updateUnit({ id, units: units - 1, price: price / units })
               }>
               -
             </span>
@@ -31,16 +31,18 @@ export default function CartItems({
             <span
               className="counter-btn"
               onClick={() =>
-                updateUnit({ id, units: units + 1, price: price + itemPrice })
+                updateUnit({ id, units: units + 1, price: price * units })
               }>
               +
             </span>
           </div>
-          <div className="price">NGN {price}</div>
+          <div className="price">
+            {defaultCurrency} {price}
+          </div>
         </div>
       </div>
       <div className="item-image">
-        <img src={image_url} alt="" />
+        <img src={image} alt="" />
       </div>
     </div>
   );

@@ -4,26 +4,26 @@ import { useQuery } from "@apollo/client";
 import logo from "assests/images/logo.png";
 import cartImg from "assests/images/carts.png";
 import arrowRight from "assests/images/arrow-right.png";
-import productOne from "assests/images/product_1024x1024.png";
-import Header from "components/UI/Header";
-import PageHeader from "components/PageHeader";
-import Main from "components/UI/Main";
+import Header from "components/Products/ui/Header";
+import PageHeader from "components/Products/ui/PageHeader";
+import Main from "components/Products/ui/Main";
 import ProductList from "components/Products/ProductList";
-import Blog from "components/Blog";
-import Footer from "components/Footer";
-import Cart from "./cart";
+import Blog from "components/Products/ui/Blog";
+import Footer from "components/Products/ui/Footer";
+import Cart from "./cart/CartList";
 import { LOAD_PRODUCTS } from "graphlib/queries";
-import { toggleCart } from "reduxlib/actions";
+import { toggleCart, getAllProducts } from "reduxlib/actions";
 
 function Home() {
   const dispatch = useDispatch();
-  const { cart, toggle } = useSelector((state) => state);
+  const { cart, toggle, products } = useSelector((state) => state);
   const [defaultCurrency, setDefaultCurrency] = useState("NGN");
 
-  const { error, loading, data } = useQuery(LOAD_PRODUCTS, {
+  const { loading } = useQuery(LOAD_PRODUCTS, {
     variables: { currency: defaultCurrency },
+    onCompleted: (data) => dispatch(getAllProducts(data)),
   });
-console.log(defaultCurrency, "data");
+
   useEffect(() => {
     toggle.toggleState
       ? document.body.classList.add("body-scroll")
@@ -31,10 +31,16 @@ console.log(defaultCurrency, "data");
   }, [toggle.toggleState]);
 
 
+  const getCartProduct = () => {
+    return cart?.map(c=> {
+      const product = products.products.find((p) => p.id === c.id);
+      return { ...c, product: product, price: product.price * c.units };
+    })
+  }
+
   const viewCart = () => {
     dispatch(toggleCart(!toggle.toggleState));
   };
-
   return (
     <>
       <Header
@@ -44,14 +50,18 @@ console.log(defaultCurrency, "data");
       />
       <Main>
         <PageHeader />
-        <ProductList data={data} toggle={toggle} loading={loading} />
+        <ProductList
+          data={products}
+          toggle={toggle}
+          loading={loading}
+          defaultCurrency={defaultCurrency}
+        />
         <Blog image={arrowRight} />
         <Footer />
         <Cart
-          image={productOne}
           cartState={toggle.toggleState}
           closeCart={viewCart}
-          cartItems={cart}
+          cartItems={getCartProduct()}
           defaultCurrency={defaultCurrency}
           setCurrency={setDefaultCurrency}
         />
