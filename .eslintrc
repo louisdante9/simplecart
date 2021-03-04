@@ -1,0 +1,13 @@
+{
+  "globals": {},
+  "env": {},
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/anchor-has-content": "off"
+  },
+  "parserOptions": {
+     "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["jsx-a11y"]
+}

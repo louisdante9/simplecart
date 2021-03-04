@@ -1,4 +1,10 @@
-export default function CartFooter({ defaultCurrency, cartTotal }) {
+export default function CartFooter({
+  defaultCurrency,
+  cartTotal,
+}: {
+  defaultCurrency: string;
+  cartTotal: number;
+}) {
   return (
     <div className="cart-footer">
       <div className="flex flex-ai-c flex-jc-sb cart-subtotal">

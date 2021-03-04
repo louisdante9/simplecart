@@ -15,6 +15,12 @@ export default function Cart({
   cartItems,
   defaultCurrency,
   setCurrency,
+}: {
+  cartState: boolean;
+  closeCart: () => void;
+  cartItems: any[],
+  defaultCurrency: string;
+  setCurrency: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const dispatch = useDispatch();
   const [cartTotal, setCartTotal] = useState(0);
@@ -26,19 +32,19 @@ export default function Cart({
     }
   }, [cartItems]);
 
-  const subTotal = (items) => {
+  const subTotal = (items: any[]) => {
     const result = items.map((item) => item.price).reduce((a, b) => a + b);
     return setCartTotal(result);
   };
 
-  const updateUnit = (product) => {
+  const updateUnit = (product: {id: number, units: number, price: number}) => {
     if (product.units < 1) {
       return dispatch(removeFromCart(product.id));
     }
     dispatch(updateCartUnits(product));
   };
 
-  const removeItem = (id) => {
+  const removeItem = (id: number) => {
     dispatch(removeFromCart(id));
   };
   return (
@@ -51,7 +57,7 @@ export default function Cart({
             name="currecy"
             value={defaultCurrency}
             onChange={(e) => setCurrency(e.target.value)}>
-            {data?.currency.map((curr) => {
+            {data?.currency.map((curr: string) => {
               return (
                 <option value={curr} key={curr}>
                   {curr}

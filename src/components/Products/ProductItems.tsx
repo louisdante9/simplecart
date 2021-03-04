@@ -5,6 +5,13 @@ export default function ProductItems({
   title,
   openCart,
   defaultCurrency,
+}: {
+  id: number,
+  openCart: (product: {}) => void,
+  defaultCurrency: string,
+  image_url: string,
+  price: number,
+  title: string
 }) {
   return (
     <div className="flex flex-fd-c flex-ai-c item ">
@@ -18,10 +25,7 @@ export default function ProductItems({
           {defaultCurrency} {price}
         </span>
       </div>
-      <button
-        onClick={() => openCart({ id, units: 1 })}>
-        Add to Cart
-      </button>
+      <button onClick={() => openCart({ id, units: 1 })}>Add to Cart</button>
     </div>
   );
 }

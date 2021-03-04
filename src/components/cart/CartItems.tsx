@@ -6,8 +6,16 @@ export default function CartItems({
   units,
   updateUnit,
   removeItem,
-  itemPrice,
   defaultCurrency,
+}: {
+  id: number;
+  image: string;
+  price: number;
+  title: string;
+  units: number;
+  updateUnit: ({}) => void;
+  removeItem: (id: number) => void;
+  defaultCurrency: string;
 }) {
   return (
     <div className="cart-item">

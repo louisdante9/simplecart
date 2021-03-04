@@ -16,7 +16,13 @@ import { toggleCart, getAllProducts } from "reduxlib/actions";
 
 function Home() {
   const dispatch = useDispatch();
-  const { cart, toggle, products } = useSelector((state) => state);
+  const { cart, toggle, products } = useSelector(
+    (state: {
+      cart: [];
+      toggle: { toggleState: boolean };
+      products: { products: [] };
+    }) => state
+  );
   const [defaultCurrency, setDefaultCurrency] = useState("NGN");
 
   const { loading } = useQuery(LOAD_PRODUCTS, {
@@ -30,15 +36,16 @@ function Home() {
       : document.body.classList.remove("body-scroll");
   }, [toggle.toggleState]);
 
-
-  const getCartProduct = () => {
-    return cart?.map(c=> {
-      const product = products.products.find((p) => p.id === c.id);
+  const getCartProduct = (): any[] => {
+    return cart?.map((c:{id:number, units: number}) => {
+       const product: any | { price: number }= products.products.find(
+        (p: { id: number }) => p.id === c.id
+      );
       return { ...c, product: product, price: product.price * c.units };
     })
   }
 
-  const viewCart = () => {
+  const viewCart: () => void = () => {
     dispatch(toggleCart(!toggle.toggleState));
   };
   return (
@@ -56,7 +63,7 @@ function Home() {
           loading={loading}
           defaultCurrency={defaultCurrency}
         />
-        <Blog image={arrowRight} />
+        <Blog arrowRight={arrowRight} />
         <Footer />
         <Cart
           cartState={toggle.toggleState}

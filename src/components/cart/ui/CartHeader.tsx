@@ -1,4 +1,4 @@
-export default function Cartheader ({ onclick}) {
+export default function Cartheader ({ onclick}: {onclick: ()=> void}) {
     return (
       <div className="flex flex-ai-c flex-jc-sb cart-top">
         <div className="closebtn">

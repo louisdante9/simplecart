@@ -1,4 +1,6 @@
-function Header({ image: { logo, cartImg }, itemCount, viewCart }) {
+import DummyLink from "components/Commons/DummyLink";
+
+function Header({ image: { logo, cartImg }, itemCount, viewCart }: {image: {logo: string, cartImg: string },itemCount: number, viewCart:() => void}) {
   return (
     <header className="header">
       <nav className="flex flex-jc-sb flex-ai-c mobile-padding">
@@ -13,21 +15,21 @@ function Header({ image: { logo, cartImg }, itemCount, viewCart }) {
               <img src={logo} alt="shop logo" />
             </div>
           </a>
-          <a href="#">Shop</a>
-          <a href="#">Help</a>
-          <a href="#">Blog</a>
+          <DummyLink href="#">Shop</DummyLink>
+          <DummyLink href="#">Help</DummyLink>
+          <DummyLink href="#">Blog</DummyLink>
         </div>
         <div className="flex flex-jc-c flex-ai-c header__right">
-          <a href="#">Account</a>
-          <a  onClick={viewCart}>
+          <DummyLink href="#">Account</DummyLink>
+          <a onClick={viewCart}>
             <img src={cartImg} alt="" />
             <span>{itemCount}</span>
           </a>
           <div className="lang">
-            <select className="">
+            <select className="" defaultValue="en">
               <option value="ar">AR</option>
               <option value="fr">FR</option>
-              <option selected="" value="en">
+              <option value="en">
                 EN
               </option>
               <option value="es">ES</option>

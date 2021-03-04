@@ -8,9 +8,9 @@ export default function ProductList({
   toggle,
   loading,
   defaultCurrency
-}) {
+}: {data: {products: []}, toggle: {toggleState: boolean}, loading: boolean, defaultCurrency: string}) {
   const dispatch = useDispatch();
-  const addItemToCart = (product) => {
+  const addItemToCart = (product: {}) => {
     dispatch(toggleCart(!toggle.toggleState));
     dispatch(addToCart(product));
     dispatch(getItemPrice(product));
@@ -21,14 +21,20 @@ export default function ProductList({
         {loading ? (
           <>loading....</>
         ) : (
-          products?.map((product) => (
-            <ProductItems
-              key={product.id}
-              openCart={addItemToCart}
-              defaultCurrency={defaultCurrency}
-              {...product}
-            />
-          ))
+          products?.map(
+            (product: { id: number; image_url: string; price: number, title: string }) => (
+              <ProductItems
+                id={product.id}
+                key={product.id}
+                image_url={product.image_url}
+                price={product.price}
+                title={product.title}
+                openCart={addItemToCart}
+                defaultCurrency={defaultCurrency}
+                // {...product}
+              />
+            )
+          )
         )}
       </div>
     </section>

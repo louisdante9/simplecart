@@ -7,11 +7,11 @@ function PageHeader() {
           <p>A 360° look at Lumin</p>
         </div>
         <div className="product__select">
-          <select>
-            <option value="" disabled="">
+          <select defaultValue="">
+            <option value="">
               Filter By
             </option>
-            <option selected="" value="all-products">
+            <option  value="all-products">
               All Products
             </option>
             <option value="new-products">New Products</option>

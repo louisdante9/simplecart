@@ -5,13 +5,14 @@ import {
   HttpLink,
   from,
 } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
-const errorLink = onError(({ graphqlErrors }) => {
-  if (graphqlErrors) {
-    graphqlErrors.map(({ message }) => {
-      return alert(`Graphql error ${message}`);
-    });
-  }
+import { ErrorResponse, onError } from "@apollo/client/link/error";
+const errorLink = onError(({ graphQLErrors }: ErrorResponse) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
 });
 
 const link = from([
