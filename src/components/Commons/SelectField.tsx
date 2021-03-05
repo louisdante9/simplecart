@@ -1,8 +1,9 @@
+
 export default function SelectField({
   children,
   ...rest
 }: {
-  children: any;
+  children: JSX.Element;
   name: string;
   value: string;
   onChange: (e: any) => void;

@@ -1,3 +1,4 @@
+import Button from 'components/Commons/Button'
 export default function CartFooter({
   defaultCurrency,
   cartTotal,
@@ -13,10 +14,11 @@ export default function CartFooter({
           {defaultCurrency} {cartTotal}
         </span>
       </div>
-      <button className="sub-button">
+      <Button className="sub-button">
+
         MAKE THIS A SUBSCRIPTION (SAVE 20%)
-      </button>
-      <button>PROCEED TO CHECKOUT</button>
+      </Button>
+      <Button className="btn">PROCEED TO CHECKOUT</Button>
     </div>
   );
 }
