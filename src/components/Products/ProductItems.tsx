@@ -1,3 +1,5 @@
+import Button from "components/Commons/Button";
+
 export default function ProductItems({
   id,
   image_url,
@@ -25,7 +27,7 @@ export default function ProductItems({
           {defaultCurrency} {price}
         </span>
       </div>
-      <button onClick={() => openCart({ id, units: 1 })}>Add to Cart</button>
+      <Button onClick={() => openCart({ id, units: 1 })}>Add to Cart</Button>
     </div>
   );
 }
